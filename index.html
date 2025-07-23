@@ -12,6 +12,37 @@
       padding: 0;
       text-align: center;
     }
+.sparkle {
+  font-size: 60px;
+  color: #E0115F; /* pink */
+  text-align: center;
+  animation: sparkle 1.5s infinite alternate;
+}
+
+@keyframes sparkle {
+  from {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #ff69b4,
+      0 0 15px #ff69b4;
+  }
+  to {
+    text-shadow:
+      0 0 10px #fff,
+      0 0 20px #ff1493,
+      0 0 30px #ff1493;
+  }
+}
+canvas {
+  position: fixed;         /* stays in place on scroll */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+/*  z-index: -1;  */           /* sits behind your content */
+  pointer-events: none;    /* prevents it from blocking buttons or interaction */
+  display: block;
+}
     header {
       background-color: #ffccd5;
       padding: 2rem;
@@ -19,11 +50,12 @@
       color: #800000;
     }
     .love-photo {
-      width: 80%;
+      width: 60%;
       max-width: 500px;
       margin: 2rem auto;
       border-radius: 15px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
     }
     .love-message {
       font-size: 1.5rem;
@@ -37,13 +69,41 @@
   </style>
 </head>
 <body>
-  <header>I Love You Soumalya 💕</header>
+
+  <header>
+<h3 class="sparkle">I Love You Soumalya 💕</h3>
+</header>
   
   <img src="we.png" alt="Romantic photo" class="love-photo" />
+ <canvas id="fireworksCanvas"></canvas>
+  <script src="script.js"></script>
 
   <div class="love-message">
    Happy Birthday My love 
   </div>
+
+
+<audio id="birthday-audio" autoplay>
+    <source src="https://www.chosic.com/wp-content/uploads/2021/05/38-Michael-Riepen-Happy-Birthday(chosic.com).mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button class="fallback-button" id="manual-play"> 💖 To the one who makes my heart sing—Happy Birthday! 💖</button>
+
+  <script>
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('birthday-audio');
+      const button = document.getElementById('manual-play');
+
+      audio.play().catch(() => {
+        button.style.display = 'inline-block';
+        button.onclick = () => {
+          audio.play();
+          button.style.display = 'none';
+        };
+      });
+    });
+  </script>
 
  </body>
 </html>
